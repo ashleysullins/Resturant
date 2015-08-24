@@ -9,6 +9,7 @@ public class Information {
   private String type;
   private int stars;
   private int price;
+  private boolean deleteme;
 
   public int getId() {
     return id;
@@ -38,13 +39,18 @@ public class Information {
     return price;
   }
 
-  public Information(String name, String address, Integer phone, String type, Integer stars, Integer price) {
+  public boolean getDeleteMe() {
+    return deleteme;
+  }
+
+  public Information(String name, String address, Integer phone, String type, Integer stars, Integer price, Boolean deleteme) {
     this.name = name;
     this.address = address;
     this.phone = phone;
     this.type = type;
     this.stars = stars;
     this.price = price;
+    this.deleteme = false;
   }
 
   public static List<Information> all() {

@@ -18,6 +18,14 @@ public class App {
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
+    get("/information/:id", (request, response) -> {
+      Map<String, Object> model = new HashMap<String, Object>();
+      model.put("template", "templates/information.vtl");
+      Information name = Information.find(Integer.parseInt(request.params(":id")));
+
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
     post("/submit", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
       model.put("template", "templates/home.vtl");
@@ -30,7 +38,11 @@ public class App {
       Integer stars = Integer.parseInt(starsString);
       String priceString = request.queryParams("newPrice");
       int price = Integer.parseInt(priceString);
-      Information newInformation = new Information(name, address, phone, type, stars, price);
+      String deleteMeString = request.queryParams("delete");
+      Boolean deleteme = Boolean.valueOf(deleteMeString);
+
+
+      Information newInformation = new Information(name, address, phone, type, stars, price, deleteme);
       newInformation.save();
       model.put("information", Information.all());
 

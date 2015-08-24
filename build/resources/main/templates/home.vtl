@@ -18,6 +18,9 @@
     <td>
       Price
     </td>
+    <td>
+      Delete
+    </td>
   </tr>
   #foreach($information in $information)
   <tr>    <td> $information.getName()</td>
@@ -35,6 +38,9 @@
     </td>
     <td>
       $information.getPrice()
+    </td>
+    <td>
+      <button type="button" class="btn btn-danger" name="delete" value="true" type="submit">Delete</button>
     </td>
   </tr>
   #end
@@ -87,5 +93,7 @@
 
     <input id="newStars" name="newStars" class="form-control" type="text" required="false" placeholder="Star Rating">
 
-        <button type="submit" class="btn btn-info">Submit!</button>
+    <input id="delete" name="delete" class="form-control" type="hidden" value="false">
+
+        <button type="submit" class="btn btn-info" value="newSubmission">Submit!</button>
   </form>
