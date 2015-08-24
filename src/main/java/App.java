@@ -4,6 +4,7 @@ import java.util.Random;
 import spark.ModelAndView;
 import spark.template.velocity.VelocityTemplateEngine;
 import static spark.Spark.*;
+import org.sql2o.*;
 
 public class App {
   public static void main(String[] args) {
@@ -12,19 +13,28 @@ public class App {
     get("/", (request, response) -> {
       Map<String, Object> model = new HashMap<String,Object>();
       model.put("template", "templates/home.vtl");
+      model.put("information", Information.all());
 
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
-    get("/results", (request, response) -> {
+    post("/submit", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
-      model.put("template", "templates/results.vtl");
-
-      //Variables that you'd like to call on each page go here
+      model.put("template", "templates/home.vtl");
+      String name = request.queryParams("newName");
+      String address = request.queryParams("newAddress");
+      String phoneString = request.queryParams("newPhone");
+      Integer phone = Integer.parseInt(phoneString);
+      String type = request.queryParams("newType");
+      String starsString = request.queryParams("newStars");
+      Integer stars = Integer.parseInt(starsString);
+      String priceString = request.queryParams("newPrice");
+      int price = Integer.parseInt(priceString);
+      Information newInformation = new Information(name, address, phone, type, stars, price);
+      newInformation.save();
+      model.put("information", Information.all());
 
       return new ModelAndView(model, layout);
-
-
     }, new VelocityTemplateEngine());
   }
 

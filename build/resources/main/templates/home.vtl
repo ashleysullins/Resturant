@@ -1,8 +1,91 @@
-<h1>Header Goes Here</h1>
-<form action='/results' method='get'>
-  <div class="form-group">
-    <input id="form_id" name="form_name" class="form-control" type="text">
-  </div>
+<h1>Resturant Guide</h1>
+<h3>Tell me about your favorite resturant!</h3>
+  <table class="table table-striped">
+  <tr>
+    <td>Name</td>
+    <td>
+      Address
+    </td>
+    <td>
+      Phone
+    </td>
+    <td>
+      Type
+    </td>
+    <td>
+      Rating
+    </td>
+    <td>
+      Price
+    </td>
+  </tr>
+  #foreach($information in $information)
+  <tr>    <td> $information.getName()</td>
+    <td>
+      $information.getAddress()
+    </td>
+    <td>
+      $information.getPhone()
+    </td>
+    <td>
+      $information.getType()
+    </td>
+    <td>
+      $information.getStars()
+    </td>
+    <td>
+      $information.getPrice()
+    </td>
+  </tr>
+  #end
+  </table>
 
-      <button type="submit" class="btn btn-info">Submit!</button>
-</form>
+
+  <form action='/submit' method='post'>
+    <div class="form-group">
+      <input id="newName" name="newName" class="form-control" type="text" required="true" placeholder="Resturant Name">
+      <input id="newAddress" name="newAddress" class="form-control" type="text" required="false" placeholder="Resturant Address">
+      <input id="newPhone" name="newPhone" class="form-control" type="text" required="false" placeholder="Resturant Phone">
+    </div>
+
+    <div class="radio">
+    <label class="radio-inline">
+      <input type="radio" name="newType" id="type" value="Burgers">
+      Burgers
+    </label>
+    <label class="radio-inline">
+      <input type="radio" name="newType" id="type" value="Mexican">
+      Mexican
+    </label>
+    <label class="radio-inline">
+      <input type="radio" name="newType" id="type" value="Italian">
+      Italian
+    </label>
+    <label class="radio-inline">
+      <input type="radio" name="newType" id="type" value="Asian">
+      Asian
+    </label>
+    <label class="radio-inline">
+      <input type="radio" name="newType" id="type" value="Other">
+      Other
+    </label>
+    </div>
+
+    <div class="radio">
+    <label class="radio-inline">
+      <input type="radio" name="newPrice" id="price" value="1">
+      $
+    </label>
+    <label class="radio-inline">
+      <input type="radio" name="newPrice" id="price" value="2">
+      $$
+    </label>
+    <label class="radio-inline">
+      <input type="radio" name="newPrice" id="price" value="3">
+      $$$
+    </label>
+
+    <input id="newStars" name="newStars" class="form-control" type="text" required="false" placeholder="Star Rating">
+
+        <button type="submit" class="btn btn-info">Submit!</button>
+  </form>

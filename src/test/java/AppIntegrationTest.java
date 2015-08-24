@@ -18,6 +18,15 @@ public class AppIntegrationTest extends FluentTest {
   @Test
   public void rootTest() {
       goTo("http://localhost:4567/");
-      assertThat(pageSource()).contains("Add your website text here");
+      assertThat(pageSource()).contains("Resturant Guide");
   }
+/*
+  @Test
+  public void starTest() {
+    goTo("http://localhost:4567/");
+    fill ("#stars") with ("3");
+    submit(".btn");
+  }
+  */
+
 }
